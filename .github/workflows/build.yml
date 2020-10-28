@@ -40,10 +40,22 @@ jobs:
         run: pod install
       - name: Build app
         working-directory: ios
-        run: |
-          xcodebuild -workspace ${{env.appName}}.xcworkspace -scheme ${{env.appName}} archive -archivePath ${{env.appName}}.xcarchive -allowProvisioningUpdates
-          xcodebuild -exportArchive -archivePath ./${{env.appName}}.xcarchive -exportPath . -exportOptionsPlist ${{env.appName}}/Info.plist
-          mv ${{env.appName}}.ipa ../${{env.appName}}.ipa
+        run: >
+          xcodebuild archive
+            -workspace ${{env.appName}}.xcworkspace
+            -scheme ${{env.appName}}
+            -sdk iphonesimulator
+            -destination 'platform=iOS Simulator,name=iPhone 8,OS=9.1'
+            -configuration Release
+            -archivePath ./build/${{env.appName}}.xcarchive
+      - name: Export app
+        working-directory: ios
+        run: >
+          xcodebuild
+            -exportArchive
+            -archivePath ./build/${{env.appName}}.xcarchive
+            -exportOptionsPlist ./ci.plist
+            -exportPath ./build
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
