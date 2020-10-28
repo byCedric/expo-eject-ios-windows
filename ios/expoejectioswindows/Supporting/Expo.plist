@@ -4,8 +4,6 @@
   <dict>
     <key>EXUpdatesSDKVersion</key>
     <string>39.0.0</string>
-    <key>EXUpdatesURL</key>
-    <string>https://exp.host/@bycedric/expo-eject-ios-windows</string>
     <key>EXUpdatesEnabled</key>
     <true/>
     <key>EXUpdatesCheckOnLaunch</key>
