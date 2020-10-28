@@ -1,17 +1,6 @@
 name: Build Android and iOS
 on: [push]
 jobs:
-  install-and-test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Setup repository
-        uses: actions/checkout@v2
-      - name: Setup Node
-        uses: actions/setup-node@v1
-        with:
-          node-version: 14.x
-      - name: Install node dependencies
-        run: yarn install --frozen-lockfile
   build-android:
     runs-on: ubuntu-latest
     steps:
@@ -35,7 +24,7 @@ jobs:
           name: app-release.apk
           path: android/app/build/outputs/apk/release/
   build-ios:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     env:
       appName: expoejectioswindows
     steps:
@@ -61,4 +50,3 @@ jobs:
         with:
           name: ${{env.appName}}.ipa
           path: ios/build/
-
