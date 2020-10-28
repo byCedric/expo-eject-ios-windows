@@ -14,10 +14,7 @@ jobs:
         run: yarn install --frozen-lockfile
       - name: Build Android Release
         working-directory: android
-        run: >
-          ./gradlew assembleRelease
-            -PMYAPP_UPLOAD_STORE_PASSWORD='${{ secrets.KEYSTORE_PASSWORD }}'
-            -PMYAPP_UPLOAD_KEY_PASSWORD='${{ secrets.KEYSTORE_PASSWORD }}'
+        run: ./gradlew assembleRelease
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
